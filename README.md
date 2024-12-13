@@ -1,4 +1,4 @@
-# Exoplanet Detection
+# Exoplanet Detector
 
 Under construction ...
 
