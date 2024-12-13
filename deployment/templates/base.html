@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Detector</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow w-full">
+        <div class="container mx-auto flex items-center justify-between px-6 py-4">
+            <a href="{{ url_for('home') }}">
+                <h1 class="text-2xl font-bold">Exoplanet Detector</h1>
+            </a>
+            <nav class="space-x-8">
+                <a href="{{ url_for('home') }}" class="hover:underline text-white">Home</a>
+                <a href="{{ url_for('upload') }}" class="hover:underline text-white">Upload
+                    Data</a>
+                <a href="{{ url_for('analyze') }}" class="hover:underline text-white">Analyze
+                    Data</a>
+                <a href="{{ url_for('results') }}" class="hover:underline text-white">View
+                    Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-slate-300 py-4 bottom-0">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Exoplanet Detector.
+                <a href="https://github.com/prabalrajpoot/exoplanet-detector" target="_blank"
+                    class="text-blue-400 hover:text-blue-300">GitHub</a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

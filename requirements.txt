@@ -1,0 +1,12 @@
+keras
+tensorflow
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+imbalanced-learn
+lightgbm
+plotly
+flask
+python-dotenv

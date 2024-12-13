@@ -1,0 +1,6 @@
+.idea
+.env
+data
+kepler-labelled-time-series-data.zip
+demo_model.keras
+deployment/uploads

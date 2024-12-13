@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="max-w-3xl mx-auto bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-bold text-center mb-6">Exoplanet Detection Results</h2>
+
+    {% if results %}
+    <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <h3 class="text-sm font-semibold text-blue-800 mb-2">Total Predictions</h3>
+            <p class="text-2xl font-bold text-blue-600">{{ results|length }}</p>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg text-center">
+            <h3 class="text-sm font-semibold text-green-800 mb-2">Exoplanet Candidates</h3>
+            <p class="text-2xl font-bold text-green-600">
+                {{ results|selectattr('Prediction', 'equalto', 'Exoplanet Star')|list|length }}
+            </p>
+        </div>
+        <div class="bg-purple-50 p-4 rounded-lg text-center">
+            <h3 class="text-sm font-semibold text-purple-800 mb-2">Detector Rate</h3>
+            <p class="text-2xl font-bold text-purple-600">
+                {{ "%.1f"|format(results|selectattr('Prediction', 'equalto', 'Exoplanet Star')|list|length / results|length *
+                100) }}%
+            </p>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto max-h-80 mb-6">
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100 text-left">
+                    <th class="border border-gray-300 px-3 py-2 text-sm">Index</th>
+                    <th class="border border-gray-300 px-3 py-2 text-sm">Prediction</th>
+                    <th class="border border-gray-300 px-3 py-2 text-sm">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr class="hover:bg-gray-50 
+                    {% if result.Prediction == 'Exoplanet' %}bg-green-50 
+                    {% else %}bg-red-50{% endif %}">
+                    <td class="border border-gray-300 px-3 py-2 text-sm">{{ result.Index }}</td>
+                    <td class="border border-gray-300 px-3 py-2 text-sm 
+                        {% if result.Prediction == 'Exoplanet' %}text-green-700 
+                        {% else %}text-red-700{% endif %}">
+                        {{ result.Prediction }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 text-center">
+                        <span class="
+                            {% if result.Prediction == 'Exoplanet' %}
+                            bg-green-200 text-green-800
+                            {% else %}
+                            bg-red-200 text-red-800
+                            {% endif %} 
+                            py-1 px-2 rounded-full text-xs">
+                            {{ result.Prediction }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex justify-between items-center gap-8">
+        <div class="text-gray-600 text-sm">
+            <span class="font-semibold">Data Insights:</span>
+            Potential exoplanet candidates detected with computational analysis
+        </div>
+
+        <a href="{{ url_for('upload') }}"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm">
+            Upload New Data
+        </a>
+    </div>
+    {% else %}
+    <p class="text-gray-600 text-center mb-6">No results to display. Please upload a dataset first.</p>
+    <div class="text-center">
+        <a href="{{ url_for('upload') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Upload Dataset
+        </a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

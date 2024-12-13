@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="max-w-lg mx-auto bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-bold text-center mb-6">Upload Flux Intensity Data</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div>
+            <label class="block text-gray-700 font-medium">Select File</label>
+            <input type="file" name="file" class="block w-full mt-2">
+        </div>
+        <div class="mt-6 flex justify-between gap-2">
+            <button type="submit" name="action" value="analyze"
+                class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Analyze
+            </button>
+            <button type="submit" name="action" value="predict"
+                class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Predict
+            </button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
